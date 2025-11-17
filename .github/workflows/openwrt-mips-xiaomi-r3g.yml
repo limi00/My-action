@@ -1,4 +1,4 @@
-name: openwrt-mips-redmi-ac2100
+name: openwrt-mips-xiaomi-r3g
 on:
   schedule:
     - cron: 0 */6 * * *
