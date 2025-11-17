@@ -65,7 +65,7 @@ jobs:
           DEBIAN_FRONTEND: noninteractive
         run: |
           bash prenv.sh
-          cp openwrt/config-mips-redmi-ac2100 /tmp/.config
+          cp openwrt/config-mips-xiaomi-r3g /tmp/.config
 
       - name: Output Machine Info
         run: |
@@ -132,7 +132,7 @@ jobs:
         with:
           compression-level: 9
           include-hidden-files: true
-          name: openwrt_mipsel-redmi-ac2100-images
+          name: openwrt_mipsel-xiaomi-r3g-images
           path: images
 
       - name: Prepare Packages Artifact
@@ -147,7 +147,7 @@ jobs:
         if: success()
         uses: actions/upload-artifact@main
         with:
-          name: openwrt_mipsel-redmi-ac2100-packages
+          name: openwrt_mipsel-xiaomi-r3g-packages
           path: pkgs
       
       - name: Package all packages into single zip
@@ -167,8 +167,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create "openwrt-mipsel-redmi-ac2100-${{ env.RELEASE_TS }}" \
-            --title "openwrt-mipsel-redmi-ac2100-${{ env.RELEASE_TS }}" \
+          gh release create "openwrt-mipsel-xiaomi-r3g-${{ env.RELEASE_TS }}" \
+            --title "openwrt-mipsel-xiaomi-r3g-${{ env.RELEASE_TS }}" \
             --notes "OpenWrt firmware build from ${{ github.sha }}" \
             --draft \
             -R "${{ github.repository }}"
@@ -185,7 +185,7 @@ jobs:
             echo "No firmware files found to upload" >&2
             exit 1
           fi
-          gh release upload "openwrt-mipsel-redmi-ac2100-${{ env.RELEASE_TS }}" "${files[@]}" -R "${{ github.repository }}" --clobber
+          gh release upload "openwrt-mipsel-xiaomi-r3g-${{ env.RELEASE_TS }}" "${files[@]}" -R "${{ github.repository }}" --clobber
 
       - name: Upload packages zip asset (if exists)
         if: success()
@@ -193,7 +193,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           if [ -f "packages_${{ env.RELEASE_TS }}.zip" ]; then
-            gh release upload "openwrt-mipsel-redmi-ac2100-${{ env.RELEASE_TS }}" "packages_${{ env.RELEASE_TS }}.zip" -R "${{ github.repository }}" --clobber
+            gh release upload "openwrt-mipsel-xiaomi-r3g-${{ env.RELEASE_TS }}" "packages_${{ env.RELEASE_TS }}.zip" -R "${{ github.repository }}" --clobber
           else
             echo "No packages zip to upload; skipping"
           fi
@@ -203,5 +203,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release edit "openwrt-mipsel-redmi-ac2100-${{ env.RELEASE_TS }}" --draft=false --latest -R "${{ github.repository }}"
+          gh release edit "openwrt-mipsel-xiaomi-r3g-${{ env.RELEASE_TS }}" --draft=false --latest -R "${{ github.repository }}"
 
