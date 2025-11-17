@@ -26,7 +26,7 @@ on:
         default: false
 
 jobs:
-  openwrt-mips-redmi-ac2100:
+  openwrt-mips-xiaomi-r3g:
     runs-on: ${{ github.event.inputs.runner_image || 'ubuntu-latest' }}
     permissions:
       contents: write
@@ -105,6 +105,9 @@ jobs:
           rm -rf package/feeds/openwrt-passwall2 package/feeds/openwrt-passwall-packages
           git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall2.git package/feeds/openwrt-passwall2
           git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall-packages.git package/feeds/openwrt-passwall-packages
+          git clone https://github.com/destan19/OpenAppFilter.git package/OpenAppFilter
+          git clone https://github.com/sirpdboy/luci-app-lucky.git package/lucky
+          git clone --depth=1 https://github.com/lmq8267/luci-app-vnt.git package/vnt
           rm -rf feeds/packages/net/{microsocks,sing-box,v2ray-geodata,xray-core}
           ./scripts/feeds update -a && ./scripts/feeds install -a
           cp /tmp/.config .config
