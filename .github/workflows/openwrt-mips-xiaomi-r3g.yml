@@ -18,7 +18,7 @@ on:
       debug_with_ssh:
         description: "Debug with SSH"
         type: boolean
-        default: false
+        default: true
 
       clean_build:
         description: "Skip use cache and clean cache"
